@@ -1,11 +1,9 @@
 package com.cms_service.controller;
 
-import com.cms_service.bean.model.*;
 import com.cms_service.bean.entity.ConsentLogEntity;
 import com.cms_service.bean.entity.PendingRequestEntity;
+import com.cms_service.bean.model.*;
 import com.cms_service.bean.response.*;
-import com.cms_service.bean.response.ListActiveConsents;
-import com.cms_service.bean.response.MedicalRecordResponse;
 import com.cms_service.service.serviceinterface.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -62,14 +60,14 @@ public class CMSController {
     public ResponseEntity saveVoluntaryConsent(@RequestBody List<VoluntaryConsent> voluntaryConsentList) {
         try {
             //System.out.println(voluntaryConsentList.toString());
-            ToastRequestBody toastRequestBody = new ToastRequestBody();
-            toastRequestBody.setPid(voluntaryConsentList.get(0).getPid());
-            toastRequestBody.setMessage("A Voluntary Consent has been created with Consent ID: "
-                    + voluntaryConsentList.get(0).getCid()
-                    + ". If you did not create the voluntary consent, please login and reject the consent.\n\n" +
-                    "Regards,\n" +
-                    "Consent Management System");
-            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//            ToastRequestBody toastRequestBody = new ToastRequestBody();
+//            toastRequestBody.setPid(voluntaryConsentList.get(0).getPid());
+//            toastRequestBody.setMessage("A Voluntary Consent has been created with Consent ID: "
+//                    + voluntaryConsentList.get(0).getCid()
+//                    + ". If you did not create the voluntary consent, please login and reject the consent.\n\n" +
+//                    "Regards,\n" +
+//                    "Consent Management System");
+//            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
             voluntaryConsentService.saveVoluntaryConsent(voluntaryConsentList);
 
             return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
@@ -115,14 +113,14 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
         try {
             updateConsentStatusService.UpdateStatus();
             updateConsentStatusService.updateActiveConsentRecords(activeConsentRecordsList);
-            ToastRequestBody toastRequestBody = new ToastRequestBody();
-            toastRequestBody.setPid(activeConsentRecordsList.get(0).getPid());
-            toastRequestBody.setMessage("An Active Consent has been modified with Consent ID: "
-                    + activeConsentRecordsList.get(0).getCid()
-                    + ". If you did not perform the update to the consent, please login and reject the consent.\n\n" +
-                    "Regards,\n" +
-                    "Consent Management System");
-            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//            ToastRequestBody toastRequestBody = new ToastRequestBody();
+//            toastRequestBody.setPid(activeConsentRecordsList.get(0).getPid());
+//            toastRequestBody.setMessage("An Active Consent has been modified with Consent ID: "
+//                    + activeConsentRecordsList.get(0).getCid()
+//                    + ". If you did not perform the update to the consent, please login and reject the consent.\n\n" +
+//                    "Regards,\n" +
+//                    "Consent Management System");
+//            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
             return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
         } catch (Exception e)
         {
@@ -138,14 +136,15 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
         try {
             updateConsentStatusService.UpdateStatus();
             updateConsentStatusService.revokeConsent(activeConsent);
-            ToastRequestBody toastRequestBody = new ToastRequestBody();
-            toastRequestBody.setPid(activeConsent.getPid());
-            toastRequestBody.setMessage("An Active Consent has been revoked with Consent ID: "
-                    + activeConsent.getCid()
-                    + ". The concerned entity's will no longer have access to your data.\n\n" +
-                    "Regards,\n" +
-                    "Consent Management System");
-            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//            ToastRequestBody toastRequestBody = new ToastRequestBody();
+//            toastRequestBody.setPid(activeConsent.getPid());
+//            toastRequestBody.setMessage("An Active Consent has been revoked with Consent ID: "
+//                    + activeConsent.
+//                    getCid()
+//                    + ". The concerned entity's will no longer have access to your data.\n\n" +
+//                    "Regards,\n" +
+//                    "Consent Management System");
+//            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
             return ResponseEntity.status(HttpStatusCode.valueOf(200)).build();
         } catch (Exception e)
         {
@@ -185,14 +184,14 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
     @PostMapping("/new-consent-request")
     public ResponseEntity newConsentRequest(@RequestBody PendingRequestEntity pendingRequestEntity){
         //System.out.println(pendingRequestEntity.toString());
-        ToastRequestBody toastRequestBody = new ToastRequestBody();
-        toastRequestBody.setPid(pendingRequestEntity.getPid());
-        toastRequestBody.setMessage("A Pending Request has been created with Pending Consent ID: "
-                + pendingRequestEntity.getPendingRequestId()
-                + ". To take action on it, please login.\n\n" +
-                "Regards,\n" +
-                "Consent Management System");
-        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//        ToastRequestBody toastRequestBody = new ToastRequestBody();
+//        toastRequestBody.setPid(pendingRequestEntity.getPid());
+//        toastRequestBody.setMessage("A Pending Request has been created with Pending Consent ID: "
+//                + pendingRequestEntity.getPendingRequestId()
+//                + ". To take action on it, please login.\n\n" +
+//                "Regards,\n" +
+//                "Consent Management System");
+//        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
         Integer status = createConsentService.createPendingRequest(pendingRequestEntity);
         if(status ==1){
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -230,14 +229,14 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
         if(isNull(pendingRequestEntity)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        ToastRequestBody toastRequestBody = new ToastRequestBody();
-        toastRequestBody.setPid(pendingRequestEntity.getPid());
-        toastRequestBody.setMessage("An action has been performed on a Pending Request with Pending Consent ID: "
-                + pendingRequestEntity.getPendingRequestId()
-                + ". If you didn't take this action, please login and revoke if active.\n\n" +
-                "Regards,\n" +
-                "Consent Management System");
-        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//        ToastRequestBody toastRequestBody = new ToastRequestBody();
+//        toastRequestBody.setPid(pendingRequestEntity.getPid());
+//        toastRequestBody.setMessage("An action has been performed on a Pending Request with Pending Consent ID: "
+//                + pendingRequestEntity.getPendingRequestId()
+//                + ". If you didn't take this action, please login and revoke if active.\n\n" +
+//                "Regards,\n" +
+//                "Consent Management System");
+//        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
         Integer status = createConsentService.createConsentLog(consentActionRequestBody, pendingRequestEntity);
         createConsentService.dropPendingRequest(pendingrequestid);
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -258,16 +257,16 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
 
     @PostMapping("/create-emergency-consent")
     public ResponseEntity createEmergencyConsent(@RequestBody PendingRequestEntity pendingRequestEntity){
-        ToastRequestBody toastRequestBody = new ToastRequestBody();
-        toastRequestBody.setPid(pendingRequestEntity.getPid());
-        toastRequestBody.setMessage("Emergency Consent has been raised with Pending Request ID: "
-                + pendingRequestEntity.getPendingRequestId()
-                + ". If you do not consent to this, please login and reject it.\n\n" +
-                "Regards,\n" +
-                "Consent Management System");
+//        ToastRequestBody toastRequestBody = new ToastRequestBody();
+//        toastRequestBody.setPid(pendingRequestEntity.getPid());
+//        toastRequestBody.setMessage("Emergency Consent has been raised with Pending Request ID: "
+//                + pendingRequestEntity.getPendingRequestId()
+//                + ". If you do not consent to this, please login and reject it.\n\n" +
+//                "Regards,\n" +
+//                "Consent Management System");
         ResponseEntity response = newConsentRequest(pendingRequestEntity);
         if(response.getStatusCode().isSameCodeAs(HttpStatus.OK)){
-            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//            toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         else{
@@ -280,14 +279,14 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
         PendingRequestEntity pendingRequestEntity = pendingReqInstance.getPendingRequestInstance(pendingrequestid);
         List<MedicalRecordResponse> medicalRecordResponseList = getMedicalRecordsService.getMedicalRecordsForPendingReq(pendingRequestEntity.getPid(),pendingRequestEntity.getTag1(),pendingRequestEntity.getTag2(),pendingRequestEntity.getTag3(),pendingRequestEntity.getFrom_date(),pendingRequestEntity.getTo_date());
         Integer status = createConsentService.createEmergencyConsent(medicalRecordResponseList, pendingRequestEntity, action.getAction());
-        ToastRequestBody toastRequestBody = new ToastRequestBody();
-        toastRequestBody.setPid(pendingRequestEntity.getPid());
-        toastRequestBody.setMessage("An action has been performed on a Pending Emergency Request with Pending Consent ID: "
-                + pendingRequestEntity.getPendingRequestId()
-                + ". If you want to modify the action, please login and verify.\n\n" +
-                "Regards,\n" +
-                "Consent Management System");
-        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//        ToastRequestBody toastRequestBody = new ToastRequestBody();
+//        toastRequestBody.setPid(pendingRequestEntity.getPid());
+//        toastRequestBody.setMessage("An action has been performed on a Pending Emergency Request with Pending Consent ID: "
+//                + pendingRequestEntity.getPendingRequestId()
+//                + ". If you want to modify the action, please login and verify.\n\n" +
+//                "Regards,\n" +
+//                "Consent Management System");
+//        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
         if(status==1){
             createConsentService.dropPendingRequest(pendingrequestid);
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -312,14 +311,14 @@ System.out.println(response.getActiveconsent()+","+response.getPendingrequests()
     public ResponseEntity delegateConsent(@RequestBody DelegateConsentReq delegateConsentReq){
         Integer status = delegateConsentService.delegateConsent(delegateConsentReq);
         ConsentLogEntity consentLogEntity = consentLogsService.getConsentLogEntity(delegateConsentReq.getCid());
-        ToastRequestBody toastRequestBody = new ToastRequestBody();
-        toastRequestBody.setPid(consentLogEntity.getPid());
-        toastRequestBody.setMessage("An active consent of your with Consent ID: "
-                + delegateConsentReq.getCid()
-                + " has been delegated to a new doctor, "+ delegateConsentReq.getNew_accessor_name() + ". If you want to update your consent, please login and modify consent.\n\n" +
-                "Regards,\n" +
-                "Consent Management System");
-        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
+//        ToastRequestBody toastRequestBody = new ToastRequestBody();
+//        toastRequestBody.setPid(consentLogEntity.getPid());
+//        toastRequestBody.setMessage("An active consent of your with Consent ID: "
+//                + delegateConsentReq.getCid()
+//                + " has been delegated to a new doctor, "+ delegateConsentReq.getNew_accessor_name() + ". If you want to update your consent, please login and modify consent.\n\n" +
+//                "Regards,\n" +
+//                "Consent Management System");
+//        toastNotificationService.requestToast(toastRequestBody.getPid(),toastRequestBody.getMessage());
         if(status==1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }

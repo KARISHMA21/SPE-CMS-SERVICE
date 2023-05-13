@@ -114,6 +114,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>cms_service</finalName>
+
     </build>
 
 </project>

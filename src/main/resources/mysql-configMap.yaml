@@ -1,0 +1,8 @@
+apiVersion : v1
+kind : ConfigMap
+metadata:
+  name : db-config-cms
+data:
+  host : mysql-cms
+  dbName: cms_schema
+  admin: http://10.108.163.22:8082

@@ -1,4 +1,9 @@
-FROM openjdk:18
-ADD target/cms_service-0.0.1-SNAPSHOT.jar cms_service-docker.jar
-ENTRYPOINT ["java","-jar","/cms_service-docker.jar"]
-
+#
+FROM openjdk:17
+EXPOSE 8084
+COPY ./target/cms_service.jar ./
+WORKDIR ./
+ENTRYPOINT ["java","-jar","/cms_service.jar"]
+#EXPOSE 8082
+#ADD target/admin_service-jar-with-dependencies.jar admin_service-jar-with-dependencies.jar
+#
