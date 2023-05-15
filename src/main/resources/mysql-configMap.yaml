@@ -5,4 +5,4 @@ metadata:
 data:
   host : mysql-cms
   dbName: cms_schema
-  admin: http://10.108.163.22:8082
+  admin: http://10.102.122.31:8082
